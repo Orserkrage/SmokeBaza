@@ -1,0 +1,480 @@
+[
+  {
+    "id": 1,
+    "title": "Hyppe Infiniti",
+    "sub": "50000 Puffs 50 mg🔥",
+    "category": "Одноразки",
+    "image": "a1.jpg",
+    "retail": 1200,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 1100 },
+      { "min": 5000, "price": 1000 },
+      { "min": 10000, "price": 900 },
+      { "min": 20000, "price": 800 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Blue Razz Freeze", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 2,
+    "title": "AAOK",
+    "sub": "21000 Puffs 20 mg ✨",
+    "category": "Одноразки",
+    "image": "a2.jpg",
+    "retail": 1000,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 950 },
+      { "min": 5000, "price": 900 },
+      { "min": 10000, "price": 850 },
+      { "min": 20000, "price": 800 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Черника Малина & Табак", "inStock": true },
+      { "name": "Ананасовый Лимонад & Банан Айс", "inStock": true },
+      { "name": "Ягодный Лед & Rainbow", "inStock": true },
+      { "name": "Двойное Яблоко & Арбуз Лед", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 3,
+    "title": "AirTouch",
+    "sub": "30000 Puffs 50 mg 🔥",
+    "category": "Одноразки",
+    "image": "a3.jpg",
+    "retail": 800,
+    "oldRetail": 1300,
+    "stock": true,
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Классический Табак", "inStock": true }
+    ],
+    "badge": "Распродажа!"
+  },
+  {
+    "id": 4,
+    "title": "Brusko Nevoks Feelin 2",
+    "sub": "1100 mAh Pod Kit",
+    "category": "Pod - Системы",
+    "image": "z1.jpg",
+    "retail": 500,
+    "stock": true,
+    "optionsType": "colors",
+    "options": [
+      { "name": "Misty Grey", "inStock": true }
+    ],
+    "badge": "Супер Цена!"
+  },
+  {
+    "id": 8,
+    "title": "Brusko Vilter S",
+    "sub": "500 mAh Pod Kit",
+    "category": "Pod - Системы",
+    "image": "z2.jpg",
+    "retail": 500,
+    "stock": true,
+    "optionsType": "colors",
+    "options": [
+      { "name": "Чёрный", "inStock": true },
+      { "name": "Красный", "inStock": true }
+    ],
+    "badge": "Супер Цена!"
+  },
+  {
+    "id": 5,
+    "title": "Manto AIO Plus 2 Limited Edition",
+    "sub": "Limited Edition",
+    "category": "Pod - Системы",
+    "image": "z3.jpg",
+    "retail": 1800,
+    "oldRetail": 2200,
+    "stock": true,
+    "optionsType": "colors",
+    "options": [
+      { "name": "Red & White", "inStock": true }
+    ],
+    "badge": "Распродажа!"
+  },
+  {
+    "id": 6,
+    "title": "Xros Pro 2",
+    "sub": "",
+    "category": "Pod - Системы",
+    "image": "z4.jpg",
+    "retail": 2700,
+    "stock": true,
+    "wholesale": [
+      { "min": 5000, "price": 2600 },
+      { "min": 10000, "price": 2500 },
+      { "min": 15000, "price": 2400 },
+      { "min": 20000, "price": 2300 }
+    ],
+    "optionsType": "colors",
+    "options": [
+      { "name": "Silver", "inStock": true },
+      { "name": "Black", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 7,
+    "title": "Xros 5 Leather Edition",
+    "sub": "",
+    "category": "Pod - Системы",
+    "image": "z5.jpg",
+    "retail": 2400,
+    "stock": true,
+    "wholesale": [
+      { "min": 5000, "price": 2300 },
+      { "min": 10000, "price": 2200 },
+      { "min": 15000, "price": 2100 },
+      { "min": 20000, "price": 2000 }
+    ],
+    "optionsType": "colors",
+    "options": [
+      { "name": "Black", "inStock": true },
+      { "name": "Grey", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 9,
+    "title": "Smoant Pasito II Pod Mod Kit 80w",
+    "sub": "New Colors",
+    "category": "Pod - Системы",
+    "image": "z7.jpg",
+    "retail": 2600,
+    "stock": true,
+    "wholesale": [
+      { "min": 5000, "price": 2500 },
+      { "min": 10000, "price": 2400 },
+      { "min": 15000, "price": 2300 },
+      { "min": 20000, "price": 2200 }
+    ],
+    "optionsType": "colors",
+    "options": [
+      { "name": "Marble", "inStock": true },
+      { "name": "Inc", "inStock": true },
+      { "name": "Prism", "inStock": true },
+      { "name": "Dreamy Pink", "inStock": true },
+      { "name": "Malachite", "inStock": true },
+      { "name": "Nymph", "inStock": true },
+      { "name": "Pink Cyan", "inStock": true },
+      { "name": "Sunset", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 10,
+    "title": "Xros 6 Mini",
+    "sub": "Ожидаем!",
+    "category": "Pod - Системы",
+    "image": "z8.jpg",
+    "retail": 1800,
+    "stock": false,
+    "wholesale": [
+      { "min": 5000, "price": 1750 },
+      { "min": 10000, "price": 1700 },
+      { "min": 15000, "price": 1650 },
+      { "min": 20000, "price": 1600 }
+    ],
+    "optionsType": "colors",
+    "options": [
+      { "name": "Black", "inStock": true },
+      { "name": "Plume Pink", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 11,
+    "title": "Xros 6",
+    "sub": "Ожидаем!",
+    "category": "Pod - Системы",
+    "image": "z9.jpg",
+    "retail": 2500,
+    "stock": false,
+    "wholesale": [
+      { "min": 5000, "price": 2400 },
+      { "min": 10000, "price": 2300 },
+      { "min": 15000, "price": 2200 },
+      { "min": 20000, "price": 2100 }
+    ],
+    "optionsType": "colors",
+    "options": [
+      { "name": "Slate Black", "inStock": true },
+      { "name": "Scorching Cloud", "inStock": true },
+      { "name": "Aurora Blue", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 12,
+    "title": "Podonki Light 20 MG",
+    "sub": "",
+    "category": "Жижки",
+    "image": "x1.jpg",
+    "retail": 300,
+    "oldRetail": 360,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 270 },
+      { "min": 5000, "price": 240 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Шоколад Вишня", "inStock": true },
+      { "name": "Дыня Арбуз", "inStock": true }
+    ],
+    "badge": "Распродажа!"
+  },
+  {
+    "id": 13,
+    "title": "Vyebon 55 MG",
+    "sub": "",
+    "category": "Жижки",
+    "image": "x2.jpg",
+    "retail": 300,
+    "oldRetail": 350,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 270 },
+      { "min": 5000, "price": 240 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Raspberry Lemon", "inStock": true },
+      { "name": "Lemon Raffaelo", "inStock": true },
+      { "name": "Banana Bubblegum Kiwi", "inStock": true },
+      { "name": "Currant Raspberry", "inStock": true }
+    ],
+    "badge": "Распродажа!"
+  },
+  {
+    "id": 15,
+    "title": "Злая монашка & Hotspot 70 MG",
+    "sub": "",
+    "category": "Жижки",
+    "image": "x4.jpg",
+    "retail": 450,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 425 },
+      { "min": 5000, "price": 400 },
+      { "min": 10000, "price": 375 },
+      { "min": 20000, "price": 350 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Персик черная смородина", "inStock": true },
+      { "name": "Ледяной энергетик", "inStock": true },
+      { "name": "Ежевика арбуз", "inStock": true },
+      { "name": "Лимонный скитлс", "inStock": true },
+      { "name": "Яблоко маракуйя", "inStock": true },
+      { "name": "Крыжовник малина смородина", "inStock": true },
+      { "name": "Ананас малина", "inStock": true },
+      { "name": "Груша виноград", "inStock": true },
+      { "name": "Морозные лесные ягоды", "inStock": false },
+      { "name": "Малина ежевика", "inStock": false },
+      { "name": "Черничный энергетик", "inStock": false },
+      { "name": "Апельсин малина", "inStock": true },
+      { "name": "Ежевика банан", "inStock": true },
+      { "name": "Яблоко малина мята", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 16,
+    "title": "Пошлая рабыня 83 MG",
+    "sub": "",
+    "category": "Жижки",
+    "image": "x5.jpg",
+    "retail": 450,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 425 },
+      { "min": 5000, "price": 400 },
+      { "min": 10000, "price": 375 },
+      { "min": 20000, "price": 350 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Энергетик", "inStock": true },
+      { "name": "Апельсин виноград", "inStock": true },
+      { "name": "Виноград смородина", "inStock": true },
+      { "name": "Спелая малина", "inStock": true },
+      { "name": "Клубника банан", "inStock": true },
+      { "name": "Цитрусовый микс", "inStock": true },
+      { "name": "Лесные ягоды", "inStock": true },
+      { "name": "Ягодная содовая", "inStock": true },
+      { "name": "Мультифрукт", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 17,
+    "title": "Anima Love Sour 50 MG",
+    "sub": "",
+    "category": "Жижки",
+    "image": "x6.jpg",
+    "retail": 400,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 370 },
+      { "min": 5000, "price": 340 },
+      { "min": 10000, "price": 310 },
+      { "min": 20000, "price": 280 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Фруктовый Энергетик", "inStock": true },
+      { "name": "Вишня Гранат", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 19,
+    "title": "Анархия Hard 60 MG",
+    "sub": "",
+    "category": "Жижки",
+    "image": "x8.jpg",
+    "retail": 400,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 370 },
+      { "min": 5000, "price": 340 },
+      { "min": 10000, "price": 310 },
+      { "min": 20000, "price": 280 }
+    ],
+    "optionsType": "flavors",
+    "options": [
+      { "name": "Вишнёвая косточка кола", "inStock": true },
+      { "name": "Банан с клубникой и сливками", "inStock": true },
+      { "name": "Ананасовый джем с манго", "inStock": true },
+      { "name": "Лимонно-лаймовая кола", "inStock": true },
+      { "name": "Апельсиново-мандариновый сок", "inStock": true },
+      { "name": "Сладко-цитрусовый вкус белого монстра", "inStock": true },
+      { "name": "Компот из сочных деревенских персиков", "inStock": true },
+      { "name": "Арбузный сок", "inStock": true },
+      { "name": "Чизкейк с апельсиновым кремом", "inStock": true },
+      { "name": "Сладкая алая клубника", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 20,
+    "title": "Xros 0.8 Ом Corex 3.0",
+    "sub": "Сменный картридж",
+    "category": "Картриджи",
+    "image": "c1.jpg",
+    "retail": 330,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 310 },
+      { "min": 5000, "price": 290 },
+      { "min": 10000, "price": 270 },
+      { "min": 20000, "price": 250 }
+    ],
+    "optionsType": "colors",
+    "options": [
+      { "name": "Совместим со всеми XROS", "inStock": true }
+    ],
+    "badge": null
+  },
+  {
+    "id": 21,
+    "title": "Smoant Mesh K-5 Coil 70-90W",
+    "sub": "Сменный испаритель",
+    "category": "Испарители",
+    "image": "c2.jpg",
+    "retail": 300,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 270 },
+      { "min": 5000, "price": 260 },
+      { "min": 10000, "price": 250 },
+      { "min": 20000, "price": 240 }
+    ],
+    "optionsType": "none",
+    "options": [],
+    "badge": null
+  },
+  {
+    "id": 22,
+    "title": "Geek Vape B-Coil 50-58W",
+    "sub": "Сменный испаритель",
+    "category": "Испарители",
+    "image": "c3.jpg",
+    "retail": 300,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 270 },
+      { "min": 5000, "price": 260 },
+      { "min": 10000, "price": 250 },
+      { "min": 20000, "price": 240 }
+    ],
+    "optionsType": "none",
+    "options": [],
+    "badge": null
+  },
+  {
+    "id": 23,
+    "title": "Manto AIO Coil 50-60W",
+    "sub": "Сменный испаритель",
+    "category": "Испарители",
+    "image": "c4.jpg",
+    "retail": 280,
+    "stock": true,
+    "wholesale": [
+      { "min": 3000, "price": 250 },
+      { "min": 5000, "price": 240 },
+      { "min": 10000, "price": 230 },
+      { "min": 20000, "price": 220 }
+    ],
+    "optionsType": "none",
+    "options": [],
+    "badge": null
+  },
+  {
+    "id": 24,
+    "title": "Smoant S4-Coil 30-35W",
+    "sub": "Сменный испаритель",
+    "category": "Испарители",
+    "image": "c5.jpg",
+    "retail": 170,
+    "oldRetail": 230,
+    "stock": true,
+    "optionsType": "none",
+    "options": [],
+    "badge": "Распродажа!"
+  },
+  {
+    "id": 25,
+    "title": "Smoant S6-Coil 7-12W",
+    "sub": "Сменный испаритель",
+    "category": "Испарители",
+    "image": "c5.jpg",
+    "retail": 100,
+    "stock": true,
+    "optionsType": "none",
+    "options": [],
+    "badge": "Распродажа!"
+  },
+  {
+    "id": 26,
+    "title": "АКБ 1500 Mah 18650",
+    "sub": "Литиевый аккумулятор",
+    "category": "Аккумуляторы",
+    "image": "c6.jpg",
+    "retail": 100,
+    "stock": true,
+    "optionsType": "none",
+    "options": [],
+    "badge": null
+  }
+]
