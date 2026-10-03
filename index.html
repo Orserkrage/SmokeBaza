@@ -216,7 +216,11 @@ header { background: #fff; border-bottom: 2px solid var(--primary-blue); padding
 .cart-footer { padding: 1.5rem; border-top: 1px solid var(--border-light); background: #fafbff; }
 .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: .75rem; font-size: 1.1rem; font-weight: 600; }
 .cart-total .amount { font-size: 1.8rem; font-weight: 800; color: var(--primary-blue); }
-.cart-wholesale-info { font-size: .8rem; color: var(--text-muted); margin-bottom: 1rem; background: var(--primary-blue-light); padding: .6rem 1rem; border-radius: 12px; border-left: 4px solid var(--primary-blue); }
+.cart-wholesale-info { font-size: .8rem; color: var(--text-muted); margin-bottom: 1rem; background: var(--primary-blue-light); padding: .6rem 1rem; border-radius: 12px; border-left: 4px solid var(--primary-blue); transition: background .2s, border-color .2s, color .2s; }
+/* Когда скидка уже применена */
+.cart-wholesale-info.active { background: #e8f0ff; border-left-color: #0a5cff; color: var(--primary-blue-dark); font-weight: 600; }
+/* Когда достигнут максимум */
+.cart-wholesale-info.max { background: #ecfdf5; border-left-color: #10b981; color: #065f46; font-weight: 600; }
 .btn-checkout { width: 100%; background: var(--primary-blue); color: #fff; border: none; padding: 1rem; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: .2s; display: flex; align-items: center; justify-content: center; gap: .75rem; margin-bottom: .75rem; }
 .btn-checkout:hover { background: var(--primary-blue-dark); }
 .screenshot-note { font-size: .75rem; color: #64748b; text-align: center; line-height: 1.4; padding: .5rem; background: #f1f5f9; border-radius: 12px; margin-top: .5rem; border: 1px dashed #94a3b8; }
@@ -720,6 +724,9 @@ const normalizeOptions = (opts) => {
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 // ======================= ЦЕНЫ =======================
+// Пороги опта (по розничной сумме корзины)
+const THRESHOLDS = [3000, 5000, 10000, 20000];
+
 const getUnitPrice = (product, totalRetail) => {
   if (product.wholesale && product.wholesale.length) {
     const sorted = [...product.wholesale].sort((a, b) => a.min - b.min);
@@ -742,9 +749,17 @@ const calculateCartTotal = () => {
     return p ? sum + getUnitPrice(p, totalRetail) * item.qty : sum;
   }, 0);
 };
+
+// Следующий порог (или null, если максимум достигнут)
 const getNextThreshold = (total) => {
-  for (const t of [3000, 5000, 10000, 20000]) if (total < t) return t;
+  for (const t of THRESHOLDS) if (total < t) return t;
   return null;
+};
+// Текущий достигнутый порог (или null, если ни один не достигнут)
+const getCurrentThreshold = (total) => {
+  let current = null;
+  for (const t of THRESHOLDS) if (total >= t) current = t;
+  return current;
 };
 
 // ======================= ПОЛОСКА КАТЕГОРИЙ =======================
@@ -1018,14 +1033,43 @@ const updateCartUI = () => {
   const totalEl = $('cartTotal');
   if (totalEl) totalEl.textContent = formatPrice(total);
 
+  // === Блок информации об опте ===
   const info = $('wholesaleInfo');
   if (info) {
     if (cart.length === 0) {
+      info.classList.remove('active', 'max');
       info.innerHTML = `<i class="fas fa-tags"></i> Добавьте товары в корзину`;
     } else {
-      const next = getNextThreshold(total);
-      if (next) info.innerHTML = `<i class="fas fa-tags"></i> До оптовой цены от ${next.toLocaleString()}₽ осталось ${(next - total).toLocaleString()}₽`;
-      else info.innerHTML = `<i class="fas fa-check-circle" style="color:#0a5cff;"></i> Применена максимальная оптовая скидка!`;
+      // Пороги считаем по РОЗНИЧНОЙ сумме — стабильно и понятно клиенту
+      const totalRetail = getTotalRetail();
+      const current = getCurrentThreshold(totalRetail);
+      const next = getNextThreshold(totalRetail);
+      const remaining = next ? next - totalRetail : 0;
+
+      if (!current && next) {
+        // Ни одного порога ещё не достигли
+        info.classList.remove('active', 'max');
+        info.innerHTML =
+          `<i class="fas fa-tags"></i> До первой оптовой цены от ` +
+          `${next.toLocaleString('ru-RU')}₽ осталось ${remaining.toLocaleString('ru-RU')}₽`;
+
+      } else if (current && next) {
+        // Скидка уже применена, но есть куда расти
+        info.classList.add('active');
+        info.classList.remove('max');
+        info.innerHTML =
+          `<i class="fas fa-check-circle"></i> ` +
+          `Опт от ${current.toLocaleString('ru-RU')}₽ применён! ` +
+          `До следующей скидки от ${next.toLocaleString('ru-RU')}₽ осталось ${remaining.toLocaleString('ru-RU')}₽`;
+
+      } else if (current && !next) {
+        // Максимум достигнут
+        info.classList.remove('active');
+        info.classList.add('max');
+        info.innerHTML =
+          `<i class="fas fa-check-circle"></i> ` +
+          `Применена максимальная оптовая скидка!`;
+      }
     }
   }
 };
