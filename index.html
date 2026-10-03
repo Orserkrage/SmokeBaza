@@ -91,6 +91,7 @@ header { background: #fff; border-bottom: 2px solid var(--primary-blue); padding
 .wholesale-item { background: var(--primary-blue-light); color: var(--primary-blue-dark); padding: .2rem .7rem; border-radius: 50px; font-weight: 600; border: 1px solid rgba(10,92,255,.2); }
 .flavors { font-size: .8rem; color: var(--text-muted); margin-bottom: 1.2rem; flex-grow: 1; }
 .flavors strong { color: var(--text-dark); }
+.flavor-out { color: #94a3b8; text-decoration: line-through; }
 .product-actions { display: flex; align-items: center; gap: .75rem; margin-top: auto; flex-wrap: wrap; }
 .btn-add { background: var(--primary-blue); color: #fff; border: none; padding: .7rem 1.5rem; border-radius: 50px; font-weight: 600; font-size: .9rem; cursor: pointer; transition: .2s; display: flex; align-items: center; justify-content: center; gap: .5rem; flex: 1; min-width: 140px; }
 .btn-add:hover { background: var(--primary-blue-dark); }
@@ -110,6 +111,16 @@ header { background: #fff; border-bottom: 2px solid var(--primary-blue); padding
 .variant-option.selected { border-color: var(--primary-blue); background: var(--primary-blue-light); font-weight: 600; }
 .variant-option::before { content: ''; display: block; width: 18px; height: 18px; min-width: 18px; border-radius: 50%; border: 2px solid #cbd5e1; transition: .15s; }
 .variant-option.selected::before { background: var(--primary-blue); border-color: var(--primary-blue); box-shadow: inset 0 0 0 3px #fff; }
+
+/* ==== НЕДОСТУПНЫЕ ВАРИАНТЫ ==== */
+.variant-option.disabled { background: #f8fafc; border-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; opacity: .8; }
+.variant-option.disabled .opt-name { text-decoration: line-through; }
+.variant-option.disabled::before { background: #f1f5f9; border-color: #cbd5e1; box-shadow: none; }
+.variant-option.disabled:hover { border-color: #e2e8f0; background: #f8fafc; }
+.variant-option .opt-name { flex: 1; }
+.variant-option .oos-tag { margin-left: auto; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: #ef4444; background: #fee2e2; padding: .15rem .55rem; border-radius: 50px; flex-shrink: 0; }
+.cart-variant-gone { font-size: .75rem; color: #ef4444; font-weight: 600; margin-top: .3rem; display: flex; align-items: center; gap: .3rem; }
+
 .modal-actions { display: flex; gap: .7rem; }
 .modal-actions button { flex: 1; padding: .9rem; border-radius: 50px; font-weight: 700; font-size: .95rem; cursor: pointer; border: none; transition: .2s; }
 .btn-modal-cancel { background: #f1f5f9; color: var(--text-dark); }
@@ -444,73 +455,227 @@ footer a:hover { text-decoration: underline; }
 
 <script>
 // ======================= КАТАЛОГ =======================
+// optionsType: "flavors" | "colors" | "none"
+// options: массив { name, inStock } — или пустой массив для "none"
 // stock: true — в наличии, false — нет в наличии ("Ожидаем!")
 const products = [
   { id: 1, title: "Hyppe Infiniti", sub: "50000 Puffs 50 mg🔥", category: "Одноразки", image: "a1.jpg", retail: 1200, stock: true,
     wholesale: [{ min: 3000, price: 1100 }, { min: 5000, price: 1000 }, { min: 10000, price: 900 }, { min: 20000, price: 800 }],
-    optionsType: "flavors", options: "Blue Razz Freeze", badge: null },
+    optionsType: "flavors",
+    options: [
+      { name: "Blue Razz Freeze", inStock: true }
+    ],
+    badge: null },
+
   { id: 2, title: "AAOK", sub: "21000 Puffs 20 mg ✨", category: "Одноразки", image: "a2.jpg", retail: 1000, stock: true,
     wholesale: [{ min: 3000, price: 950 }, { min: 5000, price: 900 }, { min: 10000, price: 850 }, { min: 20000, price: 800 }],
-    optionsType: "flavors", options: "Черника Малина & Табак, Ананасовый Лимонад & Банан Айс, Ягодный Лед & Rainbow, Двойное Яблоко & Арбуз Лед", badge: null },
+    optionsType: "flavors",
+    options: [
+      { name: "Черника Малина & Табак", inStock: true },
+      { name: "Ананасовый Лимонад & Банан Айс", inStock: true },
+      { name: "Ягодный Лед & Rainbow", inStock: true },
+      { name: "Двойное Яблоко & Арбуз Лед", inStock: true }
+    ],
+    badge: null },
+
   { id: 3, title: "AirTouch", sub: "30000 Puffs 50 mg 🔥", category: "Одноразки", image: "a3.jpg", retail: 800, oldRetail: 1300, stock: true,
-    optionsType: "flavors", options: "Классический Табак", badge: "Распродажа!" },
+    optionsType: "flavors",
+    options: [
+      { name: "Классический Табак", inStock: true }
+    ],
+    badge: "Распродажа!" },
+
   { id: 4, title: "Brusko Nevoks Feelin 2", sub: "1100 mAh Pod Kit", category: "Pod - Системы", image: "z1.jpg", retail: 500, stock: true,
-    optionsType: "colors", options: "Misty Grey", badge: "Супер Цена!" },
+    optionsType: "colors",
+    options: [
+      { name: "Misty Grey", inStock: true }
+    ],
+    badge: "Супер Цена!" },
+
   { id: 8, title: "Brusko Vilter S", sub: "500 mAh Pod Kit", category: "Pod - Системы", image: "z2.jpg", retail: 500, stock: true,
-    optionsType: "colors", options: "Чёрный, Красный", badge: "Супер Цена!" },
+    optionsType: "colors",
+    options: [
+      { name: "Чёрный", inStock: true },
+      { name: "Красный", inStock: true }
+    ],
+    badge: "Супер Цена!" },
+
   { id: 5, title: "Manto AIO Plus 2 Limited Edition", sub: "Limited Edition", category: "Pod - Системы", image: "z3.jpg", retail: 1800, oldRetail: 2200, stock: true,
-    optionsType: "colors", options: "Red & White", badge: "Распродажа!" },
+    optionsType: "colors",
+    options: [
+      { name: "Red & White", inStock: true }
+    ],
+    badge: "Распродажа!" },
+
   { id: 6, title: "Xros Pro 2", sub: "", category: "Pod - Системы", image: "z4.jpg", retail: 2700, stock: true,
     wholesale: [{ min: 5000, price: 2600 }, { min: 10000, price: 2500 }, { min: 15000, price: 2400 }, { min: 20000, price: 2300 }],
-    optionsType: "colors", options: "Silver, Black", badge: null },
+    optionsType: "colors",
+    options: [
+      { name: "Silver", inStock: true },
+      { name: "Black", inStock: true }
+    ],
+    badge: null },
+
   { id: 7, title: "Xros 5 Leather Edition", sub: "", category: "Pod - Системы", image: "z5.jpg", retail: 2400, stock: true,
     wholesale: [{ min: 5000, price: 2300 }, { min: 10000, price: 2200 }, { min: 15000, price: 2100 }, { min: 20000, price: 2000 }],
-    optionsType: "colors", options: "Black, Grey", badge: null },
+    optionsType: "colors",
+    options: [
+      { name: "Black", inStock: true },
+      { name: "Grey", inStock: true }
+    ],
+    badge: null },
+
   { id: 9, title: "Smoant Pasito II Pod Mod Kit 80w", sub: "New Colors", category: "Pod - Системы", image: "z7.jpg", retail: 2600, stock: true,
     wholesale: [{ min: 5000, price: 2500 }, { min: 10000, price: 2400 }, { min: 15000, price: 2300 }, { min: 20000, price: 2200 }],
-    optionsType: "colors", options: "Marble, Inc, Prism, Dreamy Pink, Malachite, Nymph, Pink Cyan, Sunset", badge: null },
+    optionsType: "colors",
+    options: [
+      { name: "Marble", inStock: true },
+      { name: "Inc", inStock: true },
+      { name: "Prism", inStock: true },
+      { name: "Dreamy Pink", inStock: true },
+      { name: "Malachite", inStock: true },
+      { name: "Nymph", inStock: true },
+      { name: "Pink Cyan", inStock: true },
+      { name: "Sunset", inStock: true }
+    ],
+    badge: null },
+
   { id: 10, title: "Xros 6 Mini", sub: "Ожидаем!", category: "Pod - Системы", image: "z8.jpg", retail: 1800, stock: false,
     wholesale: [{ min: 5000, price: 1750 }, { min: 10000, price: 1700 }, { min: 15000, price: 1650 }, { min: 20000, price: 1600 }],
-    optionsType: "colors", options: "Black, Plume Pink", badge: null },
+    optionsType: "colors",
+    options: [
+      { name: "Black", inStock: true },
+      { name: "Plume Pink", inStock: true }
+    ],
+    badge: null },
+
   { id: 11, title: "Xros 6", sub: "Ожидаем!", category: "Pod - Системы", image: "z9.jpg", retail: 2500, stock: false,
     wholesale: [{ min: 5000, price: 2400 }, { min: 10000, price: 2300 }, { min: 15000, price: 2200 }, { min: 20000, price: 2100 }],
-    optionsType: "colors", options: "Slate Black, Scorching Cloud, Aurora Blue", badge: null },
+    optionsType: "colors",
+    options: [
+      { name: "Slate Black", inStock: true },
+      { name: "Scorching Cloud", inStock: true },
+      { name: "Aurora Blue", inStock: true }
+    ],
+    badge: null },
+
   { id: 12, title: "Podonki Light 20 MG", sub: "", category: "Жижки", image: "x1.jpg", retail: 300, oldRetail: 360, stock: true,
     wholesale: [{ min: 3000, price: 270 }, { min: 5000, price: 240 }],
-    optionsType: "flavors", options: "Шоколад Вишня, Дыня Арбуз", badge: "Распродажа!" },
+    optionsType: "flavors",
+    options: [
+      { name: "Шоколад Вишня", inStock: true },
+      { name: "Дыня Арбуз", inStock: true }
+    ],
+    badge: "Распродажа!" },
+
   { id: 13, title: "Vyebon 55 MG", sub: "", category: "Жижки", image: "x2.jpg", retail: 300, oldRetail: 350, stock: true,
     wholesale: [{ min: 3000, price: 270 }, { min: 5000, price: 240 }],
-    optionsType: "flavors", options: "Raspberry Lemon, Lemon Raffaelo, Banana Bubblegum Kiwi, Currant Raspberry", badge: "Распродажа!" },
+    optionsType: "flavors",
+    options: [
+      { name: "Raspberry Lemon", inStock: true },
+      { name: "Lemon Raffaelo", inStock: true },
+      { name: "Banana Bubblegum Kiwi", inStock: true },
+      { name: "Currant Raspberry", inStock: true }
+    ],
+    badge: "Распродажа!" },
+
   { id: 15, title: "Злая монашка & Hotspot 70 MG", sub: "", category: "Жижки", image: "x4.jpg", retail: 450, stock: true,
     wholesale: [{ min: 3000, price: 425 }, { min: 5000, price: 400 }, { min: 10000, price: 375 }, { min: 20000, price: 350 }],
-    optionsType: "flavors", options: "Персик черная смородина, Ледяной энергетик, Ежевика арбуз, Лимонный скитлс, Яблоко маракуйя, Крыжовник малина смородина, Ананас малина, Груша виноград, Морозные лесные ягоды, Малина ежевика, Черничный энергетик, Апельсин малина, Ежевика банан, Яблоко малина мята", badge: null },
+    optionsType: "flavors",
+    options: [
+      { name: "Персик черная смородина", inStock: true },
+      { name: "Ледяной энергетик", inStock: true },
+      { name: "Ежевика арбуз", inStock: true },
+      { name: "Лимонный скитлс", inStock: true },
+      { name: "Яблоко маракуйя", inStock: true },
+      { name: "Крыжовник малина смородина", inStock: true },
+      { name: "Ананас малина", inStock: true },
+      { name: "Груша виноград", inStock: true },
+      { name: "Морозные лесные ягоды", inStock: false },
+      { name: "Малина ежевика", inStock: false },
+      { name: "Черничный энергетик", inStock: false },
+      { name: "Апельсин малина", inStock: true },
+      { name: "Ежевика банан", inStock: true },
+      { name: "Яблоко малина мята", inStock: true }
+    ],
+    badge: null },
+
   { id: 16, title: "Пошлая рабыня 83 MG", sub: "", category: "Жижки", image: "x5.jpg", retail: 450, stock: true,
     wholesale: [{ min: 3000, price: 425 }, { min: 5000, price: 400 }, { min: 10000, price: 375 }, { min: 20000, price: 350 }],
-    optionsType: "flavors", options: "Энергетик, Апельсин виноград, Виноград смородина, Спелая малина, Клубника банан, Цитрусовый микс, Лесные ягоды, Ягодная содовая, Мультифрукт", badge: null },
+    optionsType: "flavors",
+    options: [
+      { name: "Энергетик", inStock: true },
+      { name: "Апельсин виноград", inStock: true },
+      { name: "Виноград смородина", inStock: true },
+      { name: "Спелая малина", inStock: true },
+      { name: "Клубника банан", inStock: true },
+      { name: "Цитрусовый микс", inStock: true },
+      { name: "Лесные ягоды", inStock: true },
+      { name: "Ягодная содовая", inStock: true },
+      { name: "Мультифрукт", inStock: true }
+    ],
+    badge: null },
+
   { id: 17, title: "Anima Love Sour 50 MG", sub: "", category: "Жижки", image: "x6.jpg", retail: 400, stock: true,
     wholesale: [{ min: 3000, price: 370 }, { min: 5000, price: 340 }, { min: 10000, price: 310 }, { min: 20000, price: 280 }],
-    optionsType: "flavors", options: "Фруктовый Энергетик, Вишня Гранат", badge: null },
+    optionsType: "flavors",
+    options: [
+      { name: "Фруктовый Энергетик", inStock: true },
+      { name: "Вишня Гранат", inStock: true }
+    ],
+    badge: null },
+
   { id: 19, title: "Анархия Hard 60 MG", sub: "", category: "Жижки", image: "x8.jpg", retail: 400, stock: true,
     wholesale: [{ min: 3000, price: 370 }, { min: 5000, price: 340 }, { min: 10000, price: 310 }, { min: 20000, price: 280 }],
-    optionsType: "flavors", options: "Вишнёвая косточка кола, Банан с клубникой и сливками, Ананасовый джем с манго, Лимонно-лаймовая кола, Апельсиново-мандариновый сок, Сладко-цитрусовый вкус белого монстра, Компот из сочных деревенских персиков, Арбузный сок, Чизкейк с апельсиновым кремом, Сладкая алая клубника", badge: null },
+    optionsType: "flavors",
+    options: [
+      { name: "Вишнёвая косточка кола", inStock: true },
+      { name: "Банан с клубникой и сливками", inStock: true },
+      { name: "Ананасовый джем с манго", inStock: true },
+      { name: "Лимонно-лаймовая кола", inStock: true },
+      { name: "Апельсиново-мандариновый сок", inStock: true },
+      { name: "Сладко-цитрусовый вкус белого монстра", inStock: true },
+      { name: "Компот из сочных деревенских персиков", inStock: true },
+      { name: "Арбузный сок", inStock: true },
+      { name: "Чизкейк с апельсиновым кремом", inStock: true },
+      { name: "Сладкая алая клубника", inStock: true }
+    ],
+    badge: null },
+
   { id: 20, title: "Xros 0.8 Ом Corex 3.0", sub: "Сменный картридж", category: "Картриджи", image: "c1.jpg", retail: 330, stock: true,
     wholesale: [{ min: 3000, price: 310 }, { min: 5000, price: 290 }, { min: 10000, price: 270 }, { min: 20000, price: 250 }],
-    optionsType: "colors", options: "Совместим со всеми XROS", badge: null },
+    optionsType: "colors",
+    options: [
+      { name: "Совместим со всеми XROS", inStock: true }
+    ],
+    badge: null },
+
   { id: 21, title: "Smoant Mesh K-5 Coil 70-90W", sub: "Сменный испаритель", category: "Испарители", image: "c2.jpg", retail: 300, stock: true,
     wholesale: [{ min: 3000, price: 270 }, { min: 5000, price: 260 }, { min: 10000, price: 250 }, { min: 20000, price: 240 }],
-    optionsType: "none", options: "", badge: null },
+    optionsType: "none", options: [],
+    badge: null },
+
   { id: 22, title: "Geek Vape B-Coil 50-58W", sub: "Сменный испаритель", category: "Испарители", image: "c3.jpg", retail: 300, stock: true,
     wholesale: [{ min: 3000, price: 270 }, { min: 5000, price: 260 }, { min: 10000, price: 250 }, { min: 20000, price: 240 }],
-    optionsType: "none", options: "", badge: null },
+    optionsType: "none", options: [],
+    badge: null },
+
   { id: 23, title: "Manto AIO Coil 50-60W", sub: "Сменный испаритель", category: "Испарители", image: "c4.jpg", retail: 280, stock: true,
     wholesale: [{ min: 3000, price: 250 }, { min: 5000, price: 240 }, { min: 10000, price: 230 }, { min: 20000, price: 220 }],
-    optionsType: "none", options: "", badge: null },
+    optionsType: "none", options: [],
+    badge: null },
+
   { id: 24, title: "Smoant S4-Coil 30-35W", sub: "Сменный испаритель", category: "Испарители", image: "c5.jpg", retail: 170, oldRetail: 230, stock: true,
-    optionsType: "none", options: "", badge: "Распродажа!" },
+    optionsType: "none", options: [],
+    badge: "Распродажа!" },
+
   { id: 25, title: "Smoant S6-Coil 7-12W", sub: "Сменный испаритель", category: "Испарители", image: "c5.jpg", retail: 100, stock: true,
-    optionsType: "none", options: "", badge: "Распродажа!" },
+    optionsType: "none", options: [],
+    badge: "Распродажа!" },
+
   { id: 26, title: "АКБ 1500 Mah 18650", sub: "Литиевый аккумулятор", category: "Аккумуляторы", image: "c6.jpg", retail: 100, stock: true,
-    optionsType: "none", options: "", badge: null }
+    optionsType: "none", options: [],
+    badge: null }
 ];
 
 // Иконки категорий
@@ -536,8 +701,23 @@ let selectedVariant = null;
 
 const $ = (id) => document.getElementById(id);
 const formatPrice = (p) => p.toLocaleString('ru-RU') + ' ₽';
-const splitOptions = (s) => !s ? [] : s.split(',').map(x => x.trim()).filter(Boolean);
 const getOptionsLabel = (t) => t === 'flavors' ? 'Вкусы' : t === 'colors' ? 'Расцветки' : '';
+
+// Приводит options к массиву { name, inStock }. Поддерживает старый строковый формат.
+const normalizeOptions = (opts) => {
+  if (!opts) return [];
+  if (typeof opts === 'string') {
+    return opts.split(',').map(s => ({ name: s.trim(), inStock: true })).filter(o => o.name);
+  }
+  return opts.map(o =>
+    typeof o === 'string'
+      ? { name: o, inStock: true }
+      : { name: o.name, inStock: o.inStock !== false }
+  );
+};
+
+// Экранирование для безопасной вставки в HTML
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 // ======================= ЦЕНЫ =======================
 const getUnitPrice = (product, totalRetail) => {
@@ -546,7 +726,6 @@ const getUnitPrice = (product, totalRetail) => {
     let price = product.retail;
     for (const tier of sorted) {
       if (totalRetail >= tier.min) price = tier.price;
-      else break;
     }
     return price;
   }
@@ -569,20 +748,31 @@ const getNextThreshold = (total) => {
 };
 
 // ======================= ПОЛОСКА КАТЕГОРИЙ =======================
+const slugify = (s) => 'cat-' + s.toLowerCase().replace(/[^a-zа-яё0-9]+/gi, '-');
+
 const renderCategoriesBar = () => {
+  const scroll = $('categoriesScroll');
+  const bar = $('categoriesBar');
+  if (!scroll || !bar) {
+    console.warn('renderCategoriesBar: не найдены categoriesScroll/categoriesBar');
+    return;
+  }
+
   const seen = new Set();
   const categories = [];
   products.forEach(p => {
     if (!seen.has(p.category)) { seen.add(p.category); categories.push(p.category); }
   });
-  const scroll = $('categoriesScroll');
+
   scroll.innerHTML = categories.map(cat => {
-    const slug = 'cat-' + cat.toLowerCase().replace(/[^a-zа-яё0-9]+/gi, '-');
-    return `<a href="#${slug}" class="category-pill" data-cat="${cat}">
-      <i class="fas ${getCategoryIcon(cat)}"></i> ${cat}
+    const slug = slugify(cat);
+    return `<a href="#${slug}" class="category-pill" data-cat="${esc(cat)}">
+      <i class="fas ${getCategoryIcon(cat)}"></i> ${esc(cat)}
     </a>`;
   }).join('');
-  $('categoriesBar').style.display = 'block';
+
+  bar.style.display = 'block';
+
   scroll.querySelectorAll('.category-pill').forEach(pill => {
     pill.addEventListener('click', (e) => {
       e.preventDefault();
@@ -609,8 +799,8 @@ const renderProducts = () => {
 
   let html = '';
   for (const [category, items] of Object.entries(categories)) {
-    const slug = 'cat-' + category.toLowerCase().replace(/[^a-zа-яё0-9]+/gi, '-');
-    html += `<h2 class="section-title" id="${slug}" data-category="${category}">${category}</h2>`;
+    const slug = slugify(category);
+    html += `<h2 class="section-title" id="${slug}" data-category="${esc(category)}">${esc(category)}</h2>`;
     html += `<div class="products-grid">`;
     items.forEach(product => {
       const isOut = product.stock === false;
@@ -628,19 +818,23 @@ const renderProducts = () => {
       if (product.badge) {
         const cls = product.badge.includes('Распродажа') ? 'sale'
                  : product.badge.includes('Супер') ? 'super' : '';
-        badgeHtml = `<div class="product-badge ${cls}">${product.badge}</div>`;
+        badgeHtml = `<div class="product-badge ${cls}">${esc(product.badge)}</div>`;
       }
 
       const stockBadge = isOut ? `<div class="stock-badge">Нет в наличии</div>` : '';
       const oldPrice = product.oldRetail ? `<span class="old-price">${product.oldRetail}₽</span>` : '';
       const image = product.image
-        ? `<img src="${product.image}" alt="${product.title}" class="product-image" onerror="this.style.display='none'">`
+        ? `<img src="${esc(product.image)}" alt="${esc(product.title)}" class="product-image" onerror="this.style.display='none'">`
         : '';
 
       let optionsHtml = '<div class="flavors"></div>';
       if (product.optionsType !== 'none' && product.options) {
         const label = getOptionsLabel(product.optionsType);
-        optionsHtml = `<div class="flavors"><strong>${label}:</strong> ${splitOptions(product.options).join(', ')}</div>`;
+        const opts = normalizeOptions(product.options);
+        const rendered = opts.map(o =>
+          o.inStock ? esc(o.name) : `<span class="flavor-out">${esc(o.name)}</span>`
+        ).join(', ');
+        optionsHtml = `<div class="flavors"><strong>${label}:</strong> ${rendered}</div>`;
       }
 
       const btnLabel = isOut ? 'Нет в наличии' : 'В корзину';
@@ -649,14 +843,15 @@ const renderProducts = () => {
       html += `
         <div class="product-card ${isOut ? 'out-of-stock' : ''}" data-id="${product.id}">
           ${stockBadge}${badgeHtml}${image}
-          <div class="product-title">${product.title}</div>
-          <div class="product-sub">${product.sub}</div>
+          <div class="product-title">${esc(product.title)}</div>
+          <div class="product-sub">${esc(product.sub)}</div>
           <div class="price-block">
             <span class="retail-price">${product.retail}₽</span>${oldPrice}
           </div>
           ${wholesaleHtml}${optionsHtml}
           <div class="product-actions">
-            <button class="btn-add" data-id="${product.id}" data-stock="${isOut ? '0' : '1'}">
+            <button class="btn-add" data-id="${product.id}" data-stock="${isOut ? '0' : '1'}"
+                    aria-label="${isOut ? 'Товар недоступен' : 'Добавить ' + esc(product.title) + ' в корзину'}">
               <i class="fas ${btnIcon}"></i> ${btnLabel}
             </button>
           </div>
@@ -676,15 +871,24 @@ const handleAddClick = (id) => {
   const product = products.find(p => p.id === id);
   if (!product) return;
 
-  // Товар закончился
   if (product.stock === false) {
     $('outOfStockOverlay').classList.add('active');
     showToast('Упс, кажется товар закончился', true);
     return;
   }
 
-  if (product.optionsType === 'none' || !product.options) {
+  const opts = normalizeOptions(product.options);
+
+  // Нет вариантов выбора — сразу в корзину
+  if (product.optionsType === 'none' || opts.length === 0) {
     addToCart(id, null);
+    return;
+  }
+
+  // Все варианты закончились — показываем "нет в наличии"
+  if (opts.every(o => !o.inStock)) {
+    $('outOfStockOverlay').classList.add('active');
+    showToast('Упс, кажется товар закончился', true);
     return;
   }
 
@@ -694,13 +898,19 @@ const handleAddClick = (id) => {
   $('variantSubtitle').textContent = product.title;
   $('variantConfirm').disabled = true;
 
-  const opts = splitOptions(product.options);
-  $('variantList').innerHTML = opts.map(o =>
-    `<div class="variant-option" data-value="${o.replace(/"/g, '&quot;')}">${o}</div>`
-  ).join('');
+  $('variantList').innerHTML = opts.map(o => {
+    const disabled = !o.inStock;
+    return `<div class="variant-option ${disabled ? 'disabled' : ''}"
+                 data-value="${esc(o.name)}"
+                 data-disabled="${disabled ? '1' : '0'}">
+      <span class="opt-name">${esc(o.name)}</span>
+      ${disabled ? '<span class="oos-tag">нет</span>' : ''}
+    </div>`;
+  }).join('');
 
   $('variantList').querySelectorAll('.variant-option').forEach(el => {
     el.addEventListener('click', () => {
+      if (el.dataset.disabled === '1') return;
       $('variantList').querySelectorAll('.variant-option').forEach(x => x.classList.remove('selected'));
       el.classList.add('selected');
       selectedVariant = el.dataset.value;
@@ -732,9 +942,15 @@ const addToCart = (id, variant) => {
 // ======================= КОРЗИНА =======================
 const updateCartUI = () => {
   const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-  $('cartCount').textContent = totalItems;
+  const countEl = $('cartCount');
+  if (countEl) {
+    countEl.textContent = totalItems;
+    countEl.style.display = totalItems ? 'flex' : 'none';
+  }
 
   const box = $('cartItems');
+  if (!box) return;
+
   if (cart.length === 0) {
     box.innerHTML = `<div style="text-align:center;padding:3rem 1rem;color:#94a3b8;">
       <i class="fas fa-shopping-bag" style="font-size:3rem;margin-bottom:1rem;opacity:.3;"></i>
@@ -755,27 +971,35 @@ const updateCartUI = () => {
         : `<span style="color:#4b5563;">${unitPrice}₽ / шт</span>`;
 
       let variantHtml = '';
+      let variantGoneHtml = '';
       if (item.variant) {
         const label = getOptionsLabel(product.optionsType);
-        variantHtml = `<div class="cart-item-variant">${label.slice(0, -1)}: ${item.variant}</div>`;
+        variantHtml = `<div class="cart-item-variant">${esc(label.slice(0, -1))}: ${esc(item.variant)}</div>`;
+
+        const opts = normalizeOptions(product.options);
+        const variantObj = opts.find(o => o.name === item.variant);
+        if (variantObj && !variantObj.inStock) {
+          variantGoneHtml = `<div class="cart-variant-gone"><i class="fas fa-triangle-exclamation"></i> Этот вариант больше недоступен</div>`;
+        }
       }
 
       html += `
         <div class="cart-item" data-index="${index}">
           <div class="cart-item-info">
-            <div class="cart-item-title">${product.title}</div>
+            <div class="cart-item-title">${esc(product.title)}</div>
             ${variantHtml}
+            ${variantGoneHtml}
             <div class="cart-item-price">${priceDisplay}</div>
             <div style="font-size:.8rem;color:#0a5cff;font-weight:600;margin-top:.15rem;">
               ${item.qty} × ${unitPrice}₽ = ${lineTotal.toLocaleString('ru-RU')}₽
             </div>
             <div class="cart-item-qty">
-              <button class="qty-btn" data-action="decrease" data-index="${index}">−</button>
+              <button class="qty-btn" data-action="decrease" data-index="${index}" aria-label="Уменьшить количество">−</button>
               <span class="qty-value">${item.qty}</span>
-              <button class="qty-btn" data-action="increase" data-index="${index}">+</button>
+              <button class="qty-btn" data-action="increase" data-index="${index}" aria-label="Увеличить количество">+</button>
             </div>
           </div>
-          <button class="cart-item-remove" data-index="${index}"><i class="fas fa-trash-alt"></i></button>
+          <button class="cart-item-remove" data-index="${index}" aria-label="Удалить товар"><i class="fas fa-trash-alt"></i></button>
         </div>`;
     });
     box.innerHTML = html;
@@ -791,15 +1015,18 @@ const updateCartUI = () => {
   }
 
   const total = calculateCartTotal();
-  $('cartTotal').textContent = formatPrice(total);
+  const totalEl = $('cartTotal');
+  if (totalEl) totalEl.textContent = formatPrice(total);
 
   const info = $('wholesaleInfo');
-  if (cart.length === 0) {
-    info.innerHTML = `<i class="fas fa-tags"></i> Добавьте товары в корзину`;
-  } else {
-    const next = getNextThreshold(total);
-    if (next) info.innerHTML = `<i class="fas fa-tags"></i> До оптовой цены от ${next.toLocaleString()}₽ осталось ${(next - total).toLocaleString()}₽`;
-    else info.innerHTML = `<i class="fas fa-check-circle" style="color:#0a5cff;"></i> Применена максимальная оптовая скидка!`;
+  if (info) {
+    if (cart.length === 0) {
+      info.innerHTML = `<i class="fas fa-tags"></i> Добавьте товары в корзину`;
+    } else {
+      const next = getNextThreshold(total);
+      if (next) info.innerHTML = `<i class="fas fa-tags"></i> До оптовой цены от ${next.toLocaleString()}₽ осталось ${(next - total).toLocaleString()}₽`;
+      else info.innerHTML = `<i class="fas fa-check-circle" style="color:#0a5cff;"></i> Применена максимальная оптовая скидка!`;
+    }
   }
 };
 
@@ -818,35 +1045,42 @@ const removeFromCart = (index) => {
 // ======================= TOAST =======================
 const showToast = (msg, isError = false) => {
   const toast = $('toast');
-  $('toastText').textContent = msg;
+  if (!toast) return;
+  const textEl = $('toastText');
+  if (textEl) textEl.textContent = msg;
   toast.classList.toggle('error', isError);
-  toast.querySelector('i').className = isError ? 'fas fa-circle-exclamation' : 'fas fa-check-circle';
+  const icon = toast.querySelector('i');
+  if (icon) icon.className = isError ? 'fas fa-circle-exclamation' : 'fas fa-check-circle';
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2200);
 };
 
 // ======================= КОРЗИНА — ОТКРЫТИЕ =======================
 const openCart = () => {
-  $('cartModal').classList.add('open');
-  $('cartOverlay').classList.add('active');
+  const m = $('cartModal'); const o = $('cartOverlay');
+  if (m) m.classList.add('open');
+  if (o) o.classList.add('active');
   updateCartUI();
 };
 const closeCart = () => {
-  $('cartModal').classList.remove('open');
-  $('cartOverlay').classList.remove('active');
+  const m = $('cartModal'); const o = $('cartOverlay');
+  if (m) m.classList.remove('open');
+  if (o) o.classList.remove('active');
 };
 
 // ======================= СТРАНИЦА УСЛОВИЙ =======================
 const showTermsPage = (scrollTop = true) => {
-  $('mainPage').style.display = 'none';
-  $('termsPage').classList.add('active');
-  $('categoriesBar').style.display = 'none';
+  const main = $('mainPage'), terms = $('termsPage'), bar = $('categoriesBar');
+  if (main) main.style.display = 'none';
+  if (terms) terms.classList.add('active');
+  if (bar) bar.style.display = 'none';
   if (scrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 const showMainPage = (scrollTop = true) => {
-  $('termsPage').classList.remove('active');
-  $('mainPage').style.display = 'block';
-  $('categoriesBar').style.display = 'block';
+  const main = $('mainPage'), terms = $('termsPage'), bar = $('categoriesBar');
+  if (terms) terms.classList.remove('active');
+  if (main) main.style.display = 'block';
+  if (bar) bar.style.display = 'block';
   if (scrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -856,10 +1090,19 @@ const openCheckout = () => {
     showToast('Сначала добавьте товары в корзину', true);
     return;
   }
-  $('checkoutOverlay').classList.add('active');
+  const o = $('checkoutOverlay');
+  if (o) o.classList.add('active');
 };
 const closeCheckout = () => {
-  $('checkoutOverlay').classList.remove('active');
+  const o = $('checkoutOverlay');
+  if (o) o.classList.remove('active');
+};
+
+// Универсальный помощник для безопасного навешивания обработчиков
+const on = (id, event, handler) => {
+  const el = $(id);
+  if (el) el.addEventListener(event, handler);
+  else console.warn('Не найден элемент: #' + id);
 };
 
 // ======================= ЗАПУСК =======================
@@ -868,35 +1111,35 @@ window.addEventListener('load', () => {
   renderCategoriesBar();
   updateCartUI();
 
-  $('cartIcon').addEventListener('click', openCart);
-  $('cartClose').addEventListener('click', closeCart);
-  $('cartOverlay').addEventListener('click', closeCart);
+  on('cartIcon', 'click', openCart);
+  on('cartClose', 'click', closeCart);
+  on('cartOverlay', 'click', closeCart);
 
-  $('checkoutBtn').addEventListener('click', openCheckout);
-  $('checkoutCancel').addEventListener('click', closeCheckout);
-  $('checkoutOverlay').addEventListener('click', (e) => {
+  on('checkoutBtn', 'click', openCheckout);
+  on('checkoutCancel', 'click', closeCheckout);
+  on('checkoutOverlay', 'click', (e) => {
     if (e.target.id === 'checkoutOverlay') closeCheckout();
   });
 
-  $('variantConfirm').addEventListener('click', () => {
+  on('variantConfirm', 'click', () => {
     if (!currentProduct || !selectedVariant) return;
     addToCart(currentProduct.id, selectedVariant);
     closeVariant();
   });
-  $('variantCancel').addEventListener('click', closeVariant);
-  $('variantOverlay').addEventListener('click', (e) => {
+  on('variantCancel', 'click', closeVariant);
+  on('variantOverlay', 'click', (e) => {
     if (e.target.id === 'variantOverlay') closeVariant();
   });
 
-  $('oosClose').addEventListener('click', closeOutOfStock);
-  $('outOfStockOverlay').addEventListener('click', (e) => {
+  on('oosClose', 'click', closeOutOfStock);
+  on('outOfStockOverlay', 'click', (e) => {
     if (e.target.id === 'outOfStockOverlay') closeOutOfStock();
   });
 
-  $('termsLink').addEventListener('click', (e) => { e.preventDefault(); showTermsPage(); });
-  $('footerTermsLink').addEventListener('click', (e) => { e.preventDefault(); showTermsPage(); });
-  $('backBtn').addEventListener('click', (e) => { e.preventDefault(); showMainPage(); });
-  $('logoLink').addEventListener('click', (e) => { e.preventDefault(); showMainPage(); });
+  on('termsLink', 'click', (e) => { e.preventDefault(); showTermsPage(); });
+  on('footerTermsLink', 'click', (e) => { e.preventDefault(); showTermsPage(); });
+  on('backBtn', 'click', (e) => { e.preventDefault(); showMainPage(); });
+  on('logoLink', 'click', (e) => { e.preventDefault(); showMainPage(); });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
