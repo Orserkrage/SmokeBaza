@@ -144,33 +144,6 @@
     "badge": null
   },
   {
-    "id": 9,
-    "title": "Smoant Pasito II Pod Mod Kit 80w",
-    "sub": "New Colors",
-    "category": "Pod - Системы",
-    "image": "z7.jpg",
-    "retail": 2600,
-    "stock": true,
-    "wholesale": [
-      { "min": 5000, "price": 2500 },
-      { "min": 10000, "price": 2400 },
-      { "min": 15000, "price": 2300 },
-      { "min": 20000, "price": 2200 }
-    ],
-    "optionsType": "colors",
-    "options": [
-      { "name": "Marble", "inStock": true },
-      { "name": "Inc", "inStock": true },
-      { "name": "Prism", "inStock": true },
-      { "name": "Dreamy Pink", "inStock": true },
-      { "name": "Malachite", "inStock": true },
-      { "name": "Nymph", "inStock": true },
-      { "name": "Pink Cyan", "inStock": true },
-      { "name": "Sunset", "inStock": true }
-    ],
-    "badge": null
-  },
-  {
     "id": 10,
     "title": "Xros 6 Mini",
     "sub": "Ожидаем!",
