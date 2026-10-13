@@ -1,26 +1,6 @@
 [
   {
     "id": 1,
-    "title": "Hyppe Infiniti",
-    "sub": "50000 Puffs 50 mg🔥",
-    "category": "Одноразки",
-    "image": "a1.jpg",
-    "retail": 1200,
-    "stock": true,
-    "wholesale": [
-      { "min": 3000, "price": 1100 },
-      { "min": 5000, "price": 1000 },
-      { "min": 10000, "price": 900 },
-      { "min": 20000, "price": 800 }
-    ],
-    "optionsType": "flavors",
-    "options": [
-      { "name": "Blue Razz Freeze", "inStock": true }
-    ],
-    "badge": null
-  },
-  {
-    "id": 2,
     "title": "AAOK",
     "sub": "21000 Puffs 20 mg ✨",
     "category": "Одноразки",
@@ -43,7 +23,7 @@
     "badge": null
   },
   {
-    "id": 3,
+    "id": 2,
     "title": "AirTouch",
     "sub": "30000 Puffs 50 mg 🔥",
     "category": "Одноразки",
@@ -58,7 +38,7 @@
     "badge": "Распродажа!"
   },
   {
-    "id": 4,
+    "id": 3,
     "title": "Brusko Nevoks Feelin 2",
     "sub": "1100 mAh Pod Kit",
     "category": "Pod - Системы",
@@ -72,7 +52,7 @@
     "badge": "Супер Цена!"
   },
   {
-    "id": 8,
+    "id": 4,
     "title": "Brusko Vilter S",
     "sub": "500 mAh Pod Kit",
     "category": "Pod - Системы",
@@ -123,7 +103,7 @@
     "badge": null
   },
   {
-    "id": 10,
+    "id": 7,
     "title": "Xros 6 Mini",
     "sub": "Ожидаем!",
     "category": "Pod - Системы",
@@ -144,7 +124,7 @@
     "badge": null
   },
   {
-    "id": 11,
+    "id": 8,
     "title": "Xros 6",
     "sub": "Ожидаем!",
     "category": "Pod - Системы",
@@ -166,7 +146,7 @@
     "badge": null
   },
   {
-    "id": 12,
+    "id": 9,
     "title": "Podonki Light 20 MG",
     "sub": "",
     "category": "Жижки",
@@ -186,7 +166,7 @@
     "badge": "Распродажа!"
   },
   {
-    "id": 13,
+    "id": 10,
     "title": "Vyebon 55 MG",
     "sub": "",
     "category": "Жижки",
@@ -208,7 +188,7 @@
     "badge": "Распродажа!"
   },
   {
-    "id": 15,
+    "id": 11,
     "title": "Злая монашка & Hotspot 70 MG",
     "sub": "",
     "category": "Жижки",
@@ -241,7 +221,7 @@
     "badge": null
   },
   {
-    "id": 16,
+    "id": 12,
     "title": "Пошлая рабыня 83 MG",
     "sub": "",
     "category": "Жижки",
@@ -269,7 +249,7 @@
     "badge": null
   },
   {
-    "id": 17,
+    "id": 13,
     "title": "Anima Love Sour 50 MG",
     "sub": "",
     "category": "Жижки",
@@ -290,7 +270,7 @@
     "badge": null
   },
   {
-    "id": 19,
+    "id": 14,
     "title": "Анархия Hard 60 MG",
     "sub": "",
     "category": "Жижки",
@@ -319,7 +299,7 @@
     "badge": null
   },
   {
-    "id": 20,
+    "id": 15,
     "title": "Xros 0.8 Ом Corex 3.0",
     "sub": "Сменный картридж",
     "category": "Картриджи",
@@ -339,7 +319,7 @@
     "badge": null
   },
   {
-    "id": 21,
+    "id": 16,
     "title": "Smoant Mesh K-5 Coil 70-90W",
     "sub": "Сменный испаритель",
     "category": "Испарители",
@@ -357,7 +337,7 @@
     "badge": null
   },
   {
-    "id": 22,
+    "id": 17,
     "title": "Geek Vape B-Coil 50-58W",
     "sub": "Сменный испаритель",
     "category": "Испарители",
@@ -375,7 +355,7 @@
     "badge": null
   },
   {
-    "id": 23,
+    "id": 18,
     "title": "Manto AIO Coil 50-60W",
     "sub": "Сменный испаритель",
     "category": "Испарители",
@@ -393,7 +373,7 @@
     "badge": null
   },
   {
-    "id": 24,
+    "id": 19,
     "title": "Smoant S4-Coil 30-35W",
     "sub": "Сменный испаритель",
     "category": "Испарители",
@@ -406,7 +386,7 @@
     "badge": "Распродажа!"
   },
   {
-    "id": 25,
+    "id": 20,
     "title": "Smoant S6-Coil 7-12W",
     "sub": "Сменный испаритель",
     "category": "Испарители",
@@ -418,7 +398,7 @@
     "badge": "Распродажа!"
   },
   {
-    "id": 26,
+    "id": 21,
     "title": "АКБ 1500 Mah 18650",
     "sub": "Литиевый аккумулятор",
     "category": "Аккумуляторы",
