@@ -105,11 +105,11 @@
   {
     "id": 7,
     "title": "Xros 6 Mini",
-    "sub": "Ожидаем!",
+    "sub": "",
     "category": "Pod - Системы",
     "image": "z5.jpg",
     "retail": 1800,
-    "stock": false,
+    "stock": true,
     "wholesale": [
       { "min": 5000, "price": 1750 },
       { "min": 10000, "price": 1700 },
@@ -119,7 +119,12 @@
     "optionsType": "colors",
     "options": [
       { "name": "Black", "inStock": true },
-      { "name": "Plume Pink", "inStock": true }
+      { "name": "Titanium Black", "inStock": true },
+      { "name": "Titanium Silver", "inStock": true },
+      { "name": "Plume Pink", "inStock": true },
+      { "name": "Plume Blue", "inStock": true },
+      { "name": "Jelly Blue", "inStock": true },
+      { "name": "Jelly Pink", "inStock": true }
     ],
     "badge": null
   },
