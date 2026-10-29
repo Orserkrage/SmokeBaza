@@ -81,8 +81,8 @@
     ],
     "badge": "Распродажа!"
   },
-    {
-    "id": 22,
+  {
+    "id": 30,
     "title": "Smoant Pasito 3",
     "sub": "",
     "category": "Pod - Системы",
@@ -101,7 +101,7 @@
       { "name": "Purple", "inStock": true }
     ],
     "badge": null
-    ],
+  },
   {
     "id": 6,
     "title": "Xros Pro 2",
