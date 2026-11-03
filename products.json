@@ -231,7 +231,7 @@
     "options": [
       { "name": "Персик черная смородина", "inStock": true },
       { "name": "Ледяной энергетик", "inStock": true },
-      { "name": "Ежевика арбуз", "inStock": true },
+      { "name": "Ежевика арбуз", "inStock": false },
       { "name": "Лимонный скитлс", "inStock": true },
       { "name": "Яблоко маракуйя", "inStock": true },
       { "name": "Крыжовник малина смородина", "inStock": true },
